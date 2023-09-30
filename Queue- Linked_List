@@ -1,0 +1,55 @@
+package july7;
+
+public class Q_linkedList {
+	public static void main(String[] args) {
+		LinkedQ a=new LinkedQ();
+		a.EnQ(10);
+		a.EnQ(20);
+		a.EnQ(30);
+		a.sho();
+		a.DQ();
+		a.sho();
+	}
+}
+class LinkedQ{
+	class Node{
+		int data;
+		Node next;
+		Node(int d){
+			data=d;
+			next=null;
+		}
+	}Node front,rear;
+	int c=0;
+	void EnQ(int d) {
+		Node temp=new Node(d);
+		if(front==null&&rear==null) {
+			front=rear=temp;
+		}
+		else {
+			rear.next=temp;
+			rear=temp;
+		}
+	}
+	void DQ(){
+		if(front==null&&rear==null) {
+			System.out.print("Empty Queue");
+		}
+		else {
+			//Node temp=front.next;
+			front=front.next;
+		}
+	}
+	void sho() {
+            if(front==null&&rear==null)
+            System.out.println("Empty");
+            else{
+                Node t=front;
+                while(t!=null){
+                    System.out.print(t.data+" ");
+                t=t.next;
+                }
+                System.out.println();
+            }
+	}
+}
