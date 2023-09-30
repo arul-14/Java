@@ -1,0 +1,115 @@
+import java.util.*;
+public class Singly {
+	public static void main(String args[]) {
+	Single s=new Single();
+    s.insert(1);
+    s.insert(2);
+    s.insert(3);
+    s.insert(4);
+   // s.show();
+    s.insertAtSpec(2,89);
+     s.show();
+     s.delAtspec(2);
+     s.show();
+     
+  }
+}
+class Single{
+    class node{
+        int data;
+        node next;
+        node(int d){
+            data=d;
+            next=null;
+        }
+    }
+    node head,tail;
+    void delEnd(){
+        if(head==null) 
+        System.out.println("List Is empty");
+        else if(head==tail) head=tail=null;
+        else{
+            node t=head;
+            while(t.next!=tail){
+                t=t.next;
+            }
+            t.next=null;
+            tail=t;
+        }
+    }
+      
+ void insert(int d){
+     node temp=new node(d);
+     if(head==null)
+     head=tail=temp;
+     else{
+         tail.next=temp;
+         tail=temp;
+     }
+ }
+ void show(){
+     if(head==null)
+     System.out.println("List Is empty");
+     else{
+         node temp=head;
+         while(temp!=null){
+             System.out.print(temp.data+" ");
+             temp=temp.next;
+         }
+     }
+     System.out.println();
+ }
+ int len(){
+   node t=head;
+   int c=0;
+   while(t!=null){
+     c++;
+     t=t.next;
+   }
+   return c;
+ }
+ void insertAtSpec(int pos,int value){
+     node temp=new node(value);
+     int len=len();
+     if(head==null)
+     {System.out.println("This is The Frst data");
+     head=tail=temp;
+     }
+    // else if(pos==1) insertBeg(value);
+     else if(pos>len)
+     System.out.println("Out Of Range");
+     else{
+       int c=1;
+       node prev=head;
+       while(c<pos-1){
+         prev=prev.next;
+         c++;
+       }
+       temp.next=prev.next;
+       prev.next=temp;
+     } 
+   
+ }
+ void delAtspec(int pos){
+        if(pos>len()||pos<=0)
+        System.out.println("out of bound");
+        else if(head==null) 
+        System.out.println("List Is empty");
+        else if(head==tail) head=tail=null;
+        //else if(pos==1) delbeg();
+        else{
+          int c=1;
+          node t=head,prev=head;
+          while(c<pos){
+            prev=t;
+            t=t.next;
+            c++;
+          }
+          prev.next=t.next;
+          t.next=null;
+          t=null;
+          
+          
+        }
+    }
+}
