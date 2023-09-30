@@ -1,0 +1,71 @@
+import java.util.*;
+public class LinkedList_Stack {
+	 public static void main (String[] args) {
+		   stacklist a=new stacklist();
+		 
+		  Scanner sc=new Scanner(System.in);
+		  int c;
+		    do{
+		       System.out.println("********************WELCOME TO STACK WORLD******************");
+		  System.out.println("1.push\n2.pop\n3.peak\n4.isfull\n5.is empty\n6.popall\n0.Exit");
+		  System.out.println("Enter Your Choice :");
+		    int choice=sc.nextInt();
+		        switch(choice){
+		            case 0:
+		                break;
+		            case 1:
+		              System.out.print("Enter the elements count : ");
+		              int count=sc.nextInt();
+		              for(int i=0;i<count;i++)
+		              a.push(sc.nextInt());
+		                break;
+		                case 2:
+		                     System.out.print("Enter the elements count : ");
+		                      int count1=sc.nextInt();
+		                 for(int i=0;i<count1;i++){
+		             
+		             System.out.println("Popped Element is "+a.pop());
+		                 }
+		                break;  
+		                    
+		        }
+		     System.out.println("To continue press 1 :");
+		     c=sc.nextInt();
+		   }while(c==1);
+		   }
+}
+class stacklist{
+    class Node{
+        int data;
+        Node next;
+        Node(int d){
+            data=d;
+            next=null;
+        }
+    }
+    Node top;
+    int c=0;
+    void push(int value){
+        Node temp=new Node(value);
+        if(top==null){
+        top=temp;
+        System.out.println("Node "+ ++c+" Has been added");
+        }
+        else{
+            temp.next=top;
+            top=temp;
+            System.out.println("Node "+ ++c+" Has been added");
+        }
+    }
+    int pop(){
+        if(top==null){
+        System.out.println("empty stack");
+        return 0;}
+        else{
+            int c=top.data;
+            Node t=top;
+            top=top.next;
+            t=t.next=null;
+        return c;}
+    }
+}
