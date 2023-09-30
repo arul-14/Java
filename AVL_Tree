@@ -1,0 +1,49 @@
+import java.util.*;
+class AVL{
+    node root;
+class node{
+    int data;
+    int height;
+    node left,right;
+    node(int key){
+        data=key;
+        height=0;
+        left=right=null;
+    }
+}
+    void insert(int val){
+        root=insertVal(root,val);
+    }
+    node insertVal(node newRoot,int val){
+        if(newRoot==null){
+            newRoot=new node(val);
+            System.out.println("Height of "+newRoot.data);
+            System.out.println(" "+getHeight(newRoot));
+            return newRoot;
+        }
+        else if(val>newRoot.data){
+            newRoot.right=insertVal(newRoot.right,val);
+        }
+        else if(val<newRoot.data){
+            newRoot.left=insertVal(newRoot.left,val);
+        }
+        newRoot.height=1+Math.max(getHeight(newRoot.left),getHeight(newRoot.right));
+        System.out.println("Height of "+newRoot.data+" "+getHeight(newRoot));
+        return newRoot;
+    }
+    int getHeight(node temp){
+        if(temp==null){
+            return -1;
+        }
+            return temp.height;
+    }
+}
+public class Avl_tree{
+public static void main(String args[]){
+    Scanner sc=new Scanner(System.in);
+    AVL a=new AVL();
+    a.insert(12);
+    a.insert(15);
+    a.insert(1);
+}
+}
