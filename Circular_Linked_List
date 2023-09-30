@@ -1,0 +1,104 @@
+import java.util.*;
+public class CircularLL {
+	 public static void main(String[] args) {
+	     Scanner sc=new Scanner(System.in);
+	     circular obj=new circular();
+	     for(int i=0;i<5;i++){
+	       obj.insertEnd(sc.nextInt());
+	     }
+	     System.out.print("InsertAtEnd: ");
+	     obj.display();
+	     for(int j=0;j<3;j++){
+	       obj.insertBeg(sc.nextInt()); 
+	     }
+	     System.out.print("InsertAtBeg: ");
+	     obj.display();
+	       obj.insertAtSpec(3,222);
+	       System.out.print("Specified Entry: ");
+	       obj.display();
+	  }
+}
+class circular{
+    class node{
+        node prev,next;
+        int data;
+        node(int value){
+            data=value;
+            prev=next=null;
+        }
+    }
+    node head,tail;
+    void insertEnd(int value){
+        node temp=new node(value);
+        if(head==null){
+            head=tail=temp;
+            head.next=head.prev=head;
+        }
+        else{
+            tail.next=temp;
+            temp.prev=tail;
+            tail=temp;
+            tail.next=head;
+            head.prev=tail;
+            
+        }
+    }
+    void insertBeg(int value){
+      node temp=new node(value);
+      if(head==null){
+        head=tail=temp;
+        head.next=head.prev=head;
+      }
+      else{
+        head.prev=temp;
+        temp.next=head;
+        head=temp;
+        head.prev=tail;
+        tail.next=head;
+      }
+    }
+    int len(){
+	          if(head==null) return 0;
+	          else{
+	            int c=0;
+	            node t=head;
+	            while(t.next!=head){
+	              c++;t=t.next;
+	            } return c;
+	          }
+	        }
+	        void insertAtSpec(int pos ,int value){
+	            int len=len();
+	          if(pos==1) insertBeg(value);
+	          else if(pos>len+1||pos<=0)
+	          System.out.println("Invalid Position");
+	          else if(pos==len+1) insertEnd(value);
+	          else{
+	            int c=1;
+	            node t=head;
+	            node temp=new node(value);
+	            while(c<pos-1){
+	              t=t.next;
+	            c++;
+	            }
+	           temp.prev=t;
+	           temp.next=t.next;
+	           t.next=temp;
+	           temp.next.prev=temp;
+	          }
+	        }
+    void display(){
+      if(head==null) {
+        System.out.println("Empty List");
+      }
+      else{
+        node temp=head;
+        while(temp.next!=head){
+          System.out.print(temp.data+" ");
+          temp=temp.next;
+        }
+          System.out.println(tail.data);
+        
+      }
+    }
+}
