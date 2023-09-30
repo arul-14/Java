@@ -1,0 +1,156 @@
+import java.util.*;
+public class DoubleLinkedList {
+	 public static void main (String[] args) {
+	        Doubly d=new Doubly();
+	        d.insertAtEnd(1);
+	        d.insertAtEnd(2);
+	        d.insertAtEnd(3);
+	        d.insertAtEnd(4);
+	        d.showForward();
+	        d.showBackward();
+	         d.insertAtBeg(5);
+	           d.showForward();
+	        d.showBackward();
+	    d.insertAtSpec(2,456);
+	     d.showForward();
+	        d.showBackward();
+	         d.deleteAtBeg();
+	          d.showForward();
+	           d.deleteAtEnd();
+	           d.showForward();
+	        //   d.deleteAtEnd();
+	        d.deleteAtSpec(2);
+	          d.showBackward();
+	    }
+}
+	class Doubly{
+	    class Node{
+	        Node prev,next;
+	        int data;
+	        Node(int data){
+	            this.data=data;
+	            prev=next=null;
+	        } }Node head,tail;
+	        void insertAtEnd(int d){
+	            Node temp=new Node(d);
+	            if(head==null)
+	            head=tail=temp;
+	            else{
+	                tail.next=temp;
+	                temp.prev=tail;
+	                tail=temp;
+	            }
+	        }
+	        void  showForward(){
+	            if(head==null)
+	            System.out.println("Empty");
+	            else{
+	                Node t=head;
+	                System.out.println("forward");
+	                while(t!=null){
+	                    System.out.print(t.data+" ");
+	                t=t.next;
+	                }
+	                System.out.println();
+	            }
+	        }
+	         void  showBackward(){
+	            if(head==null)
+	            System.out.println("Empty");
+	            else{
+	                Node t=tail;
+	                System.out.println("backward");
+	                while(t!=null){
+	                    System.out.print(t.data+" ");
+	                t=t.prev;
+	                }
+	                System.out.println();
+	            }
+	        }
+	        void insertAtBeg(int d){
+	          Node temp=new Node(d);
+	          if(head==null)
+	          head=tail=temp;
+	          else{
+	            temp.next=head;
+	            head.prev=temp;
+	            head=temp;
+	          }
+	        }
+	        int len(){
+	          if(head==null) return 0;
+	          else{
+	            int c=0;
+	            Node t=head;
+	            while(t!=null){
+	              c++;t=t.next;
+	            } return c;
+	          }
+	        }
+	        void insertAtSpec(int pos ,int value){
+	            int len=len();
+	          if(pos==1) insertAtBeg(value);
+	          else if(pos>len+1||pos<=0)
+	          System.out.println("Invalid Position");
+	          else if(pos==len+1) insertAtEnd(value);
+	          else{
+	            int c=1;
+	            Node t=head;
+	            Node temp=new Node(value);
+	            while(c<pos-1){
+	              t=t.next;
+	            c++;
+	            }
+	           temp.prev=t;
+	           temp.next=t.next;
+	           t.next=temp;
+	           temp.next.prev=temp;
+	          }
+	        }
+	        void deleteAtBeg(){
+	          if(head==null)
+	          System.out.println("No data found");
+	          else if(head==tail)
+	          head=tail=null;
+	          else{
+	            Node t=head.next;
+	            head.next=null;
+	            head=t;
+	            t.prev=null;
+	          }
+	        }
+	        void deleteAtEnd(){
+	           if(head==null)
+	          System.out.println("No data found");
+	          else if(head==tail)
+	          head=tail=null;
+	          else{
+	            Node t=tail.prev;
+	            t.next=tail.prev=null;
+	            tail=t;
+	          }
+	        }
+	        void deleteAtSpec(int pos){
+	          int l=len();
+	          if(pos<=0||pos>l)
+	          System.out.println("Inavlid Position");
+	          else if(head==null) System.out.println("empty");
+	          else if(head==tail)  head=tail=null;
+	          else if(pos==1) deleteAtBeg();
+	          else if(pos==l) deleteAtEnd();
+	          else{
+	            int c=1;
+	            Node t=head,pre=null;
+	            while(c<pos){
+	              pre=t;
+	              t=t.next;
+	              c++;
+	            }
+	            pre.next=t.next;
+	            t.next=t.prev=null;
+	            t=pre.next;
+	            t.prev=pre;
+	          }
+	          
+	        }
+}
